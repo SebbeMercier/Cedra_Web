@@ -59,7 +59,9 @@ src/
 │   │   ├── layout.tsx        # Root Layout (Fonts, Providers)
 │   │   └── error.tsx
 ├── components/
-│   ├── admin/                # KPI Cards, DataTables
+│   ├── Pages/
+│       │── admin/  
+│       ├── home/                # KPI Cards, DataTables
 │   ├── store/                # Product Cards, Cart Drawer
 │   ├── ui/                   # Shadcn Primitives (Button, Input...)
 ├── lib/
@@ -99,9 +101,6 @@ Authentification :
 Login via Server Action -> Appel Go -> Récupération JWT.
 Stockage JWT dans HTTPOnly Cookie (Secure, SameSite).
 Middleware Next.js vérifie la présence du cookie pour protéger /admin.
-
-
-
 
 🧩 Features Spécifiques "High-Tech"
 1. Voice Commerce ("Siri UI")

@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
-  Zap,
   Mail,
   Phone,
   MapPin,
@@ -16,9 +15,6 @@ import {
   Send,
   CheckCircle2,
   Shield,
-  TrendingUp,
-  Clock,
-  Package,
   CreditCard,
   Truck,
   Award,
@@ -98,16 +94,26 @@ export default function Footer() {
                 icon={<Shield size={12} />}
                 text={t.footer.securePayment}
               />
-              <TrustBadge icon={<Truck size={12} />} text={t.footer.fastDelivery} />
-              <TrustBadge icon={<Award size={12} />} text={t.footer.productWarranty} />
+              <TrustBadge
+                icon={<Truck size={12} />}
+                text={t.footer.fastDelivery}
+              />
+              <TrustBadge
+                icon={<Award size={12} />}
+                text={t.footer.productWarranty}
+              />
             </div>
           </div>
 
           {/* Quick Links */}
           <div className="lg:col-span-2">
-            <h4 className="text-white font-semibold mb-4 text-sm">{t.footer.products}</h4>
+            <h4 className="text-white font-semibold mb-4 text-sm">
+              {t.footer.products}
+            </h4>
             <ul className="space-y-3">
-              <FooterLink href="/categories/cables">{t.footer.cablesWires}</FooterLink>
+              <FooterLink href="/categories/cables">
+                {t.footer.cablesWires}
+              </FooterLink>
               <FooterLink href="/categories/tableaux">
                 {t.footer.electricalPanels}
               </FooterLink>
@@ -117,20 +123,24 @@ export default function Footer() {
               <FooterLink href="/categories/appareillage">
                 {t.footer.equipment}
               </FooterLink>
-              <FooterLink href="/categories/domotique">{t.footer.homeAutomation}</FooterLink>
+              <FooterLink href="/categories/domotique">
+                {t.footer.homeAutomation}
+              </FooterLink>
               <FooterLink href="/promotions">{t.footer.promotions}</FooterLink>
             </ul>
           </div>
 
           {/* Resources */}
           <div className="lg:col-span-2">
-            <h4 className="text-white font-semibold mb-4 text-sm">{t.footer.services}</h4>
+            <h4 className="text-white font-semibold mb-4 text-sm">
+              {t.footer.services}
+            </h4>
             <ul className="space-y-3">
               <FooterLink href="/pro">{t.footer.proSpace}</FooterLink>
               <FooterLink href="/devis">{t.footer.freeQuote}</FooterLink>
-              <FooterLink href="/support">{t.footer.technicalSupport}</FooterLink>
-              <FooterLink href="/formations">{t.footer.training}</FooterLink>
-              <FooterLink href="/documentation">{t.footer.documentation}</FooterLink>
+              <FooterLink href="/support">
+                {t.footer.technicalSupport}
+              </FooterLink>
               <FooterLink href="/garanties">{t.footer.warranties}</FooterLink>
             </ul>
           </div>
@@ -298,7 +308,9 @@ export default function Footer() {
               <span className="text-cedra-500 font-semibold">CEDRA</span> -
               Commerce Électrique Digital Rapide Accessible
             </p>
-            <p className="text-xs text-zinc-400">{t.footer.allRightsReserved}</p>
+            <p className="text-xs text-zinc-400">
+              {t.footer.allRightsReserved}
+            </p>
           </div>
 
           {/* Legal Links */}
