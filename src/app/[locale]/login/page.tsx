@@ -42,7 +42,16 @@ export default function LoginPage() {
                 setStep("2fa");
             } else {
                 localStorage.setItem("token", response.token);
-                router.push("/dashboard");
+                try {
+                    const user = await api.auth.me(response.token);
+                    if (user.role === 'admin') {
+                        router.push("/admin");
+                    } else {
+                        router.push("/dashboard");
+                    }
+                } catch (e) {
+                    router.push("/dashboard");
+                }
             }
         } catch (err: any) {
             setError(err.message || "Invalid credentials. Please try again.");
@@ -63,7 +72,16 @@ export default function LoginPage() {
             });
 
             localStorage.setItem("token", response.token);
-            router.push("/dashboard");
+            try {
+                const user = await api.auth.me(response.token);
+                if (user.role === 'admin') {
+                    router.push("/admin");
+                } else {
+                    router.push("/dashboard");
+                }
+            } catch (e) {
+                router.push("/dashboard");
+            }
         } catch (err: any) {
             setError(err.message || "Invalid verification code.");
         } finally {

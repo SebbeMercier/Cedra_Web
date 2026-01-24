@@ -110,11 +110,8 @@ export default function StoreMap() {
 
       <Map 
         ref={mapRef}
-        initialViewState={{
-          longitude: 4.3517,
-          latitude: 51.0500,
-          zoom: 8
-        }}
+        center={[4.3517, 51.0500]}
+        zoom={8}
         theme="dark"
       >
         <MapControls position="bottom-right" />

@@ -60,12 +60,16 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 
 import StoreMap from "@/components/ui/StoreMap";
+import { api } from "@/lib/api";
+import { User } from "@/types";
+import CategoryMenuComponent from "./CategoryMenu";
 
 export default function Navbar() {
   const pathname = usePathname();
   const { t, setLocale, locale } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
   const { itemCount } = useCart();
 
   useEffect(() => {
@@ -73,6 +77,22 @@ export default function Navbar() {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
+    
+    // Check auth
+    const checkAuth = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        try {
+          const userData = await api.auth.me(token);
+          setUser(userData);
+        } catch (e) {
+          console.error("Navbar auth check failed", e);
+          localStorage.removeItem("token");
+        }
+      }
+    };
+    checkAuth();
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -128,15 +148,41 @@ export default function Navbar() {
 
                   {/* Quick Auth Actions in Menu */}
                   <div className="mt-6 flex gap-3">
-                    <Button className="flex-1 bg-white text-black hover:bg-zinc-200 h-9 text-xs font-bold uppercase tracking-wide rounded-xl">
-                      {t.nav.signIn}
-                    </Button>
-                    <Button
-                      variant="outline"
-                      className="flex-1 border-white/20 text-white hover:bg-white/10 h-9 text-xs font-bold uppercase tracking-wide rounded-xl"
-                    >
-                      Register
-                    </Button>
+                    {user ? (
+                      <>
+                        <Link href="/dashboard" className="flex-1">
+                          <Button className="w-full bg-white text-black hover:bg-zinc-200 h-9 text-[10px] font-black uppercase tracking-wide rounded-xl">
+                            {t.dashboard.title}
+                          </Button>
+                        </Link>
+                        <Button
+                          variant="outline"
+                          onClick={() => {
+                            localStorage.removeItem("token");
+                            window.location.reload();
+                          }}
+                          className="flex-1 border-red-500/20 text-red-500 hover:bg-red-500/10 h-9 text-[10px] font-black uppercase tracking-wide rounded-xl"
+                        >
+                          {t.dashboard.logout}
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <Link href="/login" className="flex-1">
+                          <Button className="w-full bg-white text-black hover:bg-zinc-200 h-9 text-[10px] font-black uppercase tracking-wide rounded-xl">
+                            {t.nav.signIn}
+                          </Button>
+                        </Link>
+                        <Link href="/register" className="flex-1">
+                          <Button
+                            variant="outline"
+                            className="w-full border-white/20 text-white hover:bg-white/10 h-9 text-[10px] font-black uppercase tracking-wide rounded-xl"
+                          >
+                            Register
+                          </Button>
+                        </Link>
+                      </>
+                    )}
                   </div>
                 </div>
 
@@ -265,51 +311,7 @@ export default function Navbar() {
 
           {/* Desktop: Departments Dropdown */}
           <div className="hidden lg:block ml-4">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="outline"
-                  className="gap-2 bg-transparent text-white hover:bg-white/10 border-white/20 px-4 rounded-md font-bold uppercase tracking-wide text-[11px] h-9"
-                >
-                  <Menu size={14} strokeWidth={2.5} />
-                  {t.nav.departments}
-                  <ChevronDown size={14} strokeWidth={2.5} />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="start"
-                className="bg-white/3 backdrop-blur-3xl border-white/10 w-64 rounded-2xl p-1.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)]"
-              >
-                <DropdownMenuLabel className="text-zinc-400 text-[10px] uppercase tracking-widest px-3 py-2">
-                  {t.nav.categories}
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator className="bg-white/10" />
-                <DropdownMenuItem className="flex items-center gap-3 text-zinc-300 hover:text-white hover:bg-white/10 cursor-pointer rounded-xl px-3 py-2.5 transition-all">
-                  <Zap size={16} className="text-zinc-500" />
-                  <span className="text-sm">{t.nav.circuitProtection}</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="flex items-center gap-3 text-zinc-300 hover:text-white hover:bg-white/10 cursor-pointer rounded-xl px-3 py-2.5 transition-all">
-                  <Lightbulb size={16} className="text-zinc-500" />
-                  <span className="text-sm">{t.nav.lightingSolutions}</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="flex items-center gap-3 text-zinc-300 hover:text-white hover:bg-white/10 cursor-pointer rounded-xl px-3 py-2.5 transition-all">
-                  <Power size={16} className="text-zinc-500" />
-                  <span className="text-sm">{t.nav.socketsAndSwitches}</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="flex items-center gap-3 text-zinc-300 hover:text-white hover:bg-white/10 cursor-pointer rounded-xl px-3 py-2.5 transition-all">
-                  <Hammer size={16} className="text-zinc-500" />
-                  <span className="text-sm">{t.nav.industrialTools}</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="flex items-center gap-3 text-zinc-300 hover:text-white hover:bg-white/10 cursor-pointer rounded-xl px-3 py-2.5 transition-all">
-                  <Package size={16} className="text-zinc-500" />
-                  <span className="text-sm">{t.nav.cablesAndWiring}</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator className="bg-white/10" />
-                <DropdownMenuItem className="text-cedra-500 font-bold cursor-pointer rounded-xl px-3 py-2.5 hover:bg-cedra-500/10 text-sm">
-                  {t.nav.viewAllCategories} →
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <CategoryMenuComponent />
           </div>
 
           {/* Desktop Search Bar */}
@@ -392,14 +394,28 @@ export default function Navbar() {
               </Button>
             </div>
 
-            {/* Desktop: Sign In */}
+            {/* Desktop: Sign In / Dashboard */}
             <div className="hidden lg:block">
-              <Button
-                variant="ghost"
-                className="gap-2 text-zinc-300 hover:text-white hover:bg-white/10 px-3 h-9 text-xs"
-              >
-                {t.nav.signIn}
-              </Button>
+              {user ? (
+                <Link href="/dashboard">
+                  <Button
+                    variant="ghost"
+                    className="gap-2 text-cedra-500 hover:text-white hover:bg-cedra-500/10 px-3 h-9 text-xs font-black uppercase tracking-widest"
+                  >
+                    <Zap size={14} className="animate-pulse" />
+                    {t.dashboard.title}
+                  </Button>
+                </Link>
+              ) : (
+                <Link href="/login">
+                  <Button
+                    variant="ghost"
+                    className="gap-2 text-zinc-300 hover:text-white hover:bg-white/10 px-3 h-9 text-xs"
+                  >
+                    {t.nav.signIn}
+                  </Button>
+                </Link>
+              )}
             </div>
 
             {/* Language Selector */}

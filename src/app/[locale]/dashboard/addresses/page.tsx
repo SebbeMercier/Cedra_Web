@@ -57,7 +57,7 @@ export default function AddressesPage() {
             const token = localStorage.getItem("token");
             if (!token) throw new Error("Not authenticated");
 
-            await api.addresses.createPersonal(token, formData);
+            await api.addresses.create(token, formData);
             await loadAddresses();
             setShowCreateForm(false);
             setFormData({

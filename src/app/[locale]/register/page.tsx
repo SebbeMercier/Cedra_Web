@@ -40,15 +40,33 @@ export default function RegisterPage() {
         }
 
         try {
-            const response = await api.auth.register({
-                name: `${formData.firstName} ${formData.lastName}`.trim(),
+            const registerData: RegisterRequest = {
                 email: formData.email,
-                phone: formData.phone,
-                password: formData.password
-            });
+                password: formData.password,
+                first_name: formData.firstName,
+                last_name: formData.lastName,
+                name: `${formData.firstName} ${formData.lastName}`.trim(),
+                phone: formData.phone || undefined
+            };
 
-            localStorage.setItem("token", response.token);
-            router.push("/dashboard");
+            console.log("Sending register data:", registerData);
+            const response = await api.auth.register(registerData);
+            console.log("Register response:", response);
+
+            if (response.requires_2fa) {
+                // Store temp token if needed for 2FA setup, or handle redirect
+                if (response.token) localStorage.setItem("token", response.token);
+                // For now, we'll redirect to a hypothetical 2FA verification or just dashboard if the token allows access
+                // You might want to create a /auth/verify-2fa page
+                router.push(response.token ? "/dashboard" : "/login"); 
+            } else if (response.token) {
+                localStorage.setItem("token", response.token);
+                router.push("/dashboard");
+            } else {
+                // Handle case like { "additionalProp1": {} } where no token is returned
+                console.log("No token in response, might need further action:", response);
+                setError("Registration successful, but no session token received. Please try logging in.");
+            }
 
         } catch (err: any) {
             setError(err.message || "Registration failed. Please try again.");
@@ -124,6 +142,18 @@ export default function RegisterPage() {
                                 placeholder="jean@email.com"
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                required
+                                className="bg-white/5 border-white/10 focus:border-cedra-500/50 transition-colors"
+                            />
+                        </div>
+                        <div>
+                            <Label htmlFor="phone">Phone Number</Label>
+                            <Input
+                                id="phone"
+                                type="tel"
+                                placeholder="+32 123 45 67 89"
+                                value={formData.phone}
+                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                                 required
                                 className="bg-white/5 border-white/10 focus:border-cedra-500/50 transition-colors"
                             />

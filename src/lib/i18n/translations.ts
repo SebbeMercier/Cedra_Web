@@ -1100,6 +1100,6 @@ export const translations = {
       saveProduct: "Product opslaan",
     },
   },
-} as const;
+};
 
 export type TranslationKeys = typeof translations.fr;

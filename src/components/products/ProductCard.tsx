@@ -87,7 +87,17 @@ export default function ProductCard({ id, name, price, category, sku, stock, ima
                     className="w-full mt-4 bg-red-600 hover:bg-red-700 text-white py-2.5 rounded font-black text-[10px] uppercase tracking-[0.2em] shadow-lg shadow-red-600/10 transition-all border border-red-500/20"
                     onClick={(e) => {
                         e.preventDefault();
-                        addToCart({ id, name, price, category, description: "", stock: stock || 100 });
+                        addToCart({
+                            id,
+                            name,
+                            price,
+                            description: "",
+                            sku: sku || `SKU-CD-${id}`,
+                            currency: "EUR",
+                            category_id: category,
+                            inventory_count: stock || 100,
+                            images: image ? [image] : []
+                        });
                     }}
                 >
                     Dispatch Now

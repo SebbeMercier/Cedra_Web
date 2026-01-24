@@ -7,6 +7,7 @@ import Link from "next/link";
 import { api } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "@/lib/i18n";
+import { Button } from "@/components/ui/button";
 
 export default function CartPage() {
     const { t } = useTranslation();

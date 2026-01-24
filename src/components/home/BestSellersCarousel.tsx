@@ -26,7 +26,7 @@ export default function BestSellersCarousel() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const [hoveredId, setHoveredId] = useState<number | null>(null);
-  const [setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
   // Simulate loading for demonstration
