@@ -25,7 +25,9 @@ export async function generateMetadata({
   const t = translations[locale as Locale] || translations.en;
 
   return {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://cedra.com"),
+    metadataBase: new URL(
+      process.env.NEXT_PUBLIC_APP_URL || "https://cedra-shop.be",
+    ),
     title: {
       default: t.metadata.title,
       template: "%s | CEDRA",
@@ -71,9 +73,7 @@ export default async function RootLayout({
         <AppProvider locale={locale}>
           <Navbar />
           <main>
-            <LanguageTransition>
-              {children}
-            </LanguageTransition>
+            <LanguageTransition>{children}</LanguageTransition>
           </main>
           <B2BCopilot />
           <InstallAppModal />
