@@ -43,6 +43,15 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8081";
 
 async function safeFetch(url: string, options: RequestInit) {
   try {
+    // Si l'URL contient /api/products, on ajoute automatiquement le tag 'products' pour l'ISR
+    if (url.includes('/api/products')) {
+      (options as any).next = { 
+        ...(options as any).next,
+        tags: [...((options as any).next?.tags || []), 'products'],
+        revalidate: 3600
+      };
+    }
+
     const response = await fetch(url, options);
     return response;
   } catch (error) {

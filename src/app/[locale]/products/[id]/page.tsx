@@ -1,15 +1,19 @@
 import { Metadata } from "next";
-import ProductContent from "./ProductContent";
+import ProductDetail from "@/components/pages/products/ProductDetail";
 import { api } from "@/lib/api";
 
 type Props = {
   params: Promise<{ id: string; locale: string }>;
 };
 
+// Configuration ISR : La page sera régénérée au maximum toutes les heures
+export const revalidate = 3600;
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   
   try {
+    // Utilisation de tags pour permettre la revalidation à la demande via Valkey
     const products = await api.products.search(id);
     const product = products.find((p) => p.id === id) || products[0];
 
@@ -51,15 +55,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ params }: Props) {
-  const { id } = await params;
+  const { id, locale } = await params;
   
   let initialProduct = null;
   try {
+    // On passe le tag 'products' qui sera intercepté par notre cache-handler.js
     const products = await api.products.search(id);
     initialProduct = products.find((p) => p.id === id) || products[0];
   } catch (error) {
     console.error("Error fetching product for page:", error);
   }
 
-  return <ProductContent initialProduct={initialProduct} />;
+  return <ProductDetail initialProduct={initialProduct} />;
 }

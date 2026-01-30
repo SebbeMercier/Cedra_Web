@@ -1,0 +1,24 @@
+services:
+  valkey:
+    image: valkey/valkey:8.0-alpine
+    container_name: cedra-valkey-dev
+    ports:
+      - "6379:6379"
+    command: ["valkey-server", 
+      "--maxmemory", "1gb", 
+      "--maxmemory-policy", "allkeys-lru",
+      "--databases", "16" 
+    ]
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+# Optionnel: Interface de gestion visuelle pour le cache
+  redis-insight:
+    image: redis/redisinsight:latest
+    ports:
+      - "8001:8001"
+    depends_on:
+      - valkey

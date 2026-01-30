@@ -168,6 +168,42 @@ export const translations = {
       previous: "Précédent",
       seeMore: "Voir plus",
       seeLess: "Voir moins",
+      search: "Recherche",
+      results: "résultats",
+      noResults: "Aucun résultat pour",
+    },
+    // Search Page
+    search: {
+      title: "Résultats de",
+      titleAccent: "Recherche",
+      placeholder: "Que recherchez-vous ?",
+      found: "Nous avons trouvé",
+      resultsFor: "résultats pour votre recherche",
+    },
+    // Contact Page
+    contact: {
+      title: "Nous",
+      titleAccent: "Contacter",
+      subtitle: "Notre équipe d'experts est là pour vous aider.",
+      name: "Nom complet",
+      email: "Email professionnel",
+      subject: "Sujet",
+      message: "Message",
+      send: "Envoyer le message",
+      success: "Message envoyé avec succès !",
+      info: "Informations de contact",
+      address: "Siège social : Rue de l'Électricité 42, 1000 Bruxelles",
+      phone: "+32 2 123 45 67",
+    },
+    // About Page
+    about: {
+      title: "À Propos de",
+      titleAccent: "CEDRA",
+      subtitle: "Le futur de la distribution électrique B2B.",
+      mission: "Notre Mission",
+      missionDesc: "Révolutionner l'approvisionnement électrique grâce à l'IA.",
+      vision: "Notre Vision",
+      visionDesc: "Devenir le partenaire technologique incontournable des électriciens.",
     },
     // Products Page
     products: {
@@ -552,6 +588,42 @@ export const translations = {
       previous: "Previous",
       seeMore: "See more",
       seeLess: "See less",
+      search: "Search",
+      results: "results",
+      noResults: "No results for",
+    },
+    // Search Page
+    search: {
+      title: "Search",
+      titleAccent: "Results",
+      placeholder: "What are you looking for?",
+      found: "We found",
+      resultsFor: "results for your search",
+    },
+    // Contact Page
+    contact: {
+      title: "Contact",
+      titleAccent: "Us",
+      subtitle: "Our expert team is here to help you.",
+      name: "Full Name",
+      email: "Business Email",
+      subject: "Subject",
+      message: "Message",
+      send: "Send Message",
+      success: "Message sent successfully!",
+      info: "Contact Information",
+      address: "Headquarters: Electricity Street 42, 1000 Brussels",
+      phone: "+32 2 123 45 67",
+    },
+    // About Page
+    about: {
+      title: "About",
+      titleAccent: "CEDRA",
+      subtitle: "The future of B2B electrical distribution.",
+      mission: "Our Mission",
+      missionDesc: "Revolutionize electrical procurement through AI.",
+      vision: "Our Vision",
+      visionDesc: "Becoming the essential technological partner for electricians.",
     },
     // Products Page
     products: {
@@ -930,6 +1002,42 @@ export const translations = {
       previous: "Vorige",
       seeMore: "Meer zien",
       seeLess: "Minder zien",
+      search: "Zoeken",
+      results: "resultaten",
+      noResults: "Geen resultaten voor",
+    },
+    // Search Page
+    search: {
+      title: "Zoek",
+      titleAccent: "Resultaten",
+      placeholder: "Waar bent u naar op zoek?",
+      found: "We hebben gevonden",
+      resultsFor: "resultaten voor uw zoekopdracht",
+    },
+    // Contact Page
+    contact: {
+      title: "Contact",
+      titleAccent: "Opnemen",
+      subtitle: "Ons deskundige team staat voor u klaar.",
+      name: "Volledige naam",
+      email: "Zakelijke e-mail",
+      subject: "Onderwerp",
+      message: "Bericht",
+      send: "Bericht verzenden",
+      success: "Bericht succesvol verzonden!",
+      info: "Contactinformatie",
+      address: "Hoofdkantoor: Elektriciteitsstraat 42, 1000 Brussel",
+      phone: "+32 2 123 45 67",
+    },
+    // About Page
+    about: {
+      title: "Over",
+      titleAccent: "CEDRA",
+      subtitle: "De toekomst van B2B elektrische distributie.",
+      mission: "Onze Missie",
+      missionDesc: "Revolutioneren van elektrische inkoop via AI.",
+      vision: "Onze Visie",
+      visionDesc: "De onmisbare technologische partner worden voor elektriciens.",
     },
     // Products Page
     products: {

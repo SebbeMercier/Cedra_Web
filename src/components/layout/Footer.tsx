@@ -58,7 +58,7 @@ export default function Footer() {
                 <div className="relative">
                   <div className="absolute inset-0 bg-cedra-500 blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
                   <Image
-                    src="/logo.svg"
+                    src="/logo-full.svg"
                     alt="Cedra"
                     width={96}
                     height={48}
@@ -256,7 +256,7 @@ export default function Footer() {
               <PaymentBadge
                 icon={
                   <Image
-                    src="./payment-icons/Mastercard.svg"
+                    src="/payment-icons/Mastercard.svg"
                     alt="Mastercard"
                     width={40}
                     height={40}
@@ -268,7 +268,7 @@ export default function Footer() {
               <PaymentBadge
                 icon={
                   <Image
-                    src="./payment-icons/Visa.svg"
+                    src="/payment-icons/Visa.svg"
                     alt="Visa"
                     width={40}
                     height={40}

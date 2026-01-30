@@ -33,6 +33,10 @@ export async function generateMetadata({
       template: "%s | CEDRA",
     },
     description: t.metadata.description,
+    icons: {
+      icon: "/logo-caddie.svg",
+      apple: "/logo-caddie.svg",
+    },
     openGraph: {
       title: t.metadata.ogTitle,
       description: t.metadata.description,
